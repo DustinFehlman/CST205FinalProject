@@ -1,4 +1,8 @@
-#Team Educode Final Project
+#Team Educode Final Project: Dustin Fehlman, Carlos Sanchez, Hanna Bonert
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import soundManipulation
 
 class Scoreboard:
   score = 0
@@ -27,16 +31,25 @@ class Player:
   def __init__(self, name):
     self.name = name
 
+def playSound(file):
+  sound = makeSound(file)
+  play(sound)
+  return sound
+
 def game():
+  path = (os.path.dirname(os.path.realpath(__file__)))
+  
   showInformation("Welcome! You are about to embark on a journey that will stretch your hearing capabilities to their maximum!")
   playerName = requestString("What is your name, adventurous adventurer?")
   player1 = Player(playerName)
   scoreboard = Scoreboard(player1.name)
   
   showInformation("Current Score: " + str(scoreboard.score) + "\nYou enter a large room with a phonograph. There are posters from old movies adorning the walls.")
-  #insert first sound file
+  soundPointer = playSound(path + '/media/audio/gameSoundFiles/reversedBB.wav')
   sound1Response = requestString("What do you hear playing from the phonograph?")
-  if soundAccuracy(sound1Response, "correct"): #placeholder- insert correct answer instead of "correct"
+  stopPlaying(soundPointer)
+  
+  if soundAccuracy(sound1Response, "brady brunch"):
     scoreboard.addScore(1)
     showInformation("Correct!")
   else:
@@ -44,18 +57,20 @@ def game():
   
   showInformation("Current Score: " + str(scoreboard.score) + "\nYou enter a second room. Blinking from the bright lights, you realize you have walked right onto a stage. " + 
                       "The audience is full- standing room only.")
-  #insert second sound file
+  soundPointer = playSound(path + '/media/audio/gameSoundFiles/slowAndy.wav')
   sound2Response = requestString("Current Score: " + str(scoreboard.score) + "\nQuickly- before they remove you forcibly- what is the singer singing?")
-  if soundAccuracy(sound2Response, "correct"): #placeholder- insert correct answer instead of "correct"
+  stopPlaying(soundPointer)
+  if soundAccuracy(sound2Response, "the andy griffith show"): #placeholder- insert correct answer instead of "correct"
     scoreboard.addScore(1)
     showInformation("Correct!")
   else:
     showInformation("Sorry. That is incorrect.")
   
   showInformation("The security guard takes you off the satge and leads you outside to a car. The radio is playing.")
-  #insert third sound file
+  soundPointer = playSound(path + '/media/audio/gameSoundFiles/scoobyhigh.wav')
   sound3Response = requestString("Current Score: " + str(scoreboard.score) + "\nWhat do you hear on the radio?")
-  if soundAccuracy(sound3Response, "correct"): #placeholder- insert correct answer instead of "correct"
+  stopPlaying(soundPointer)
+  if soundAccuracy(sound3Response, "the scooby-doo show"):
     scoreboard.addScore(1)
     showInformation("Correct!")
   else:
@@ -94,6 +109,8 @@ def soundAccuracy(response, correctString):
     return False
    
 def main():
+  print("Preparing games files...")
+  prepSoundFiles()
   game()
   
   
