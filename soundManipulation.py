@@ -61,9 +61,24 @@ def prepSoundFiles():
   if os.path.isfile(path + '/media/audio/gameSoundFiles/slowAndy.wav') == False:
     andy = makeSound(path + '/media/audio/orginalSoundFiles/Andy Griffith Show.wav')
     slowAndy = slowdown(andy)
-    writeSoundTo(slowAndy,path + '/media/audio/gameSoundFiles/slowAndy.wav')
+    writeSoundTo(slowAndy, path + '/media/audio/gameSoundFiles/slowAndy.wav')
   
   if os.path.isfile(path + '/media/audio/gameSoundFiles/scoobyhigh.wav') == False:
     scooby = makeSound(path + '/media/audio/orginalSoundFiles/scoobydoo.wav')
     scooby = spedUp(scooby)
-    writeSoundTo(scooby,path + '/media/audio/gameSoundFiles/scoobyhigh.wav')
+    writeSoundTo(scooby, path + '/media/audio/gameSoundFiles/scoobyhigh.wav')
+  
+  if os.path.isfile(path + '/media/audio/gameSoundFiles/batmanSpedUpReversed.wav') == False:
+    batman = makeSound(path + '/media/audio/orginalSoundFiles/38 Batman.wav')
+    batmanSpedUp = spedUp(batman)
+    batmanSpedUpReversed = reverse(batmanSpedUp)
+    batmanSpedUpReversed = normalize(batmanSpedUpReversed)
+    writeSoundTo(batmanSpedUpReversed, path + '/media/audio/gameSoundFiles/batmanSpedUpReversed.wav')
+  
+  if os.path.isfile(path + '/media/audio/gameSoundFiles/officeSlowDownReversed.wav') == False:
+    office = makeSound(path + '/media/audio/orginalSoundFiles/The Office.wav')
+    officeSlowDown = slowdown(office)
+    officeSlowDownReversed = reverse(officeSlowDown)
+    officeSlowDownReversed = normalize(officeSlowDownReversed)
+    writeSoundTo(officeSlowDownReversed, path + '/media/audio/gameSoundFiles/officeSlowDownReversed.wav')  
+ 

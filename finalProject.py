@@ -2,7 +2,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
-import soundManipulation
+from soundManipulation import prepSoundFiles
 
 class Scoreboard:
   score = 0
@@ -49,7 +49,7 @@ def game():
   sound1Response = requestString("What do you hear playing from the phonograph?")
   stopPlaying(soundPointer)
   
-  if soundAccuracy(sound1Response, "brady brunch"):
+  if soundAccuracy(sound1Response, "the brady brunch"):
     scoreboard.addScore(1)
     showInformation("Correct!")
   else:
@@ -77,18 +77,20 @@ def game():
     showInformation("Sorry. That is incorrect.")
   
   showInformation("After you fill in some paperwork, you are free to go. You pass a music store.")
-  #insert fourth sound file
+  soundPointer = playSound(path + '/media/audio/gameSoundFiles/batmanSpedUpReversed.wav')
   sound4Response = requestString("Current Score: " + str(scoreboard.score) + "\nWhat are they playing in the store?")
-  if soundAccuracy(sound4Response, "correct"): #placeholder- insert correct answer instead of "correct"
+  stopPlaying(soundPointer)
+  if soundAccuracy(sound4Response, "batman"): #placeholder- insert correct answer instead of "correct"
     scoreboard.addScore(1)
     showInformation("Correct!")
   else:
     showInformation("Sorry. That is incorrect.")
   
   showInformation("You pass an outdoor concert in a park.")
-  #insert fifth sound file
+  soundPointer = playSound(path + '/media/audio/gameSoundFiles/officeSlowDownReversed.wav')
   sound5Response = requestString("Current Score: " + str(scoreboard.score) + "\nWhat is the lead singer singing?")
-  if soundAccuracy(sound5Response, "correct"): #placeholder- insert correct answer instead of "correct"
+  stopPlaying(soundPointer)
+  if soundAccuracy(sound5Response, "the office"): #placeholder- insert correct answer instead of "correct"
     scoreboard.addScore(1)
     showInformation("Correct!")
   else:
@@ -97,7 +99,7 @@ def game():
   if scoreboard.score > 3:  #4 or 5
     showInformation(player1.name + ", you are a sound expert! You guessed " + str(scoreboard.score) + " sounds correctly!")
   elif scoreboard.score > 1: #2 or 3
-    showInformation(player1.name + ", you correctly guessed some of the sounds- " + str(scoreboard.score) + " to be exact.") 
+    showInformation(player1.name + ", you correctly guessed some of the sounds, " + str(scoreboard.score) + " to be exact.") 
   else: # 0 or 1
     showInformation(player1.name + ", nice try. You gussed " + str(scoreboard.score) + " sounds correctly.")
   
